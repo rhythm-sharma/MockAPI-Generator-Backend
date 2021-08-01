@@ -1,11 +1,10 @@
 {
-  "name": "create-nodejs-express-app",
-  "version": "1.7.0",
-  "description": "Create a Node.js app for building production-ready RESTful APIs using Express, by running one command",
+  "name": "mockapi",
+  "version": "0.1.0",
   "bin": "bin/createNodejsApp.js",
   "main": "src/index.js",
-  "repository": "https://github.com/hagopj13/node-express-boilerplate.git",
-  "author": "Hagop Jamkojian <hagopj13@gmail.com>",
+  "repository": "https://github.com/rrhythmsharma/MockAPI-Generator-Backend.git",
+  "author": "Rhythm Sharma <rrhythmsharma@gmail.com>",
   "license": "MIT",
   "engines": {
     "node": ">=12.0.0"
@@ -24,12 +23,12 @@
     "docker:prod": "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up",
     "docker:dev": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up",
     "docker:test": "docker-compose -f docker-compose.yml -f docker-compose.test.yml up",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "pre-commit": "lint-staged"
   },
   "keywords": [
     "node",
     "node.js",
-    "boilerplate",
     "generator",
     "express",
     "rest",
@@ -91,5 +90,16 @@
     "nodemon": "^2.0.0",
     "prettier": "^2.0.5",
     "supertest": "^6.0.1"
-  }
+  },
+  "lint-staged": {
+    "*.{js,ts,json,md}": [
+        "prettier --write",
+        "git add -A ."
+    ],
+    "src/**/*.{js,ts}": [
+        "prettier --write",
+        "eslint --quiet",
+        "git add -A ."
+    ]
+}
 }

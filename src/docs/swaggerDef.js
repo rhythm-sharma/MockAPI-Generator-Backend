@@ -4,11 +4,11 @@ const config = require('../config/config');
 const swaggerDef = {
   openapi: '3.0.0',
   info: {
-    title: 'node-express-boilerplate API documentation',
+    title: 'Mock API Generator documentation',
     version,
     license: {
       name: 'MIT',
-      url: 'https://github.com/hagopj13/node-express-boilerplate/blob/master/LICENSE',
+      url: 'https://github.com/rrhythmsharma/MockAPI-Generator-Backend/blob/master/LICENSE',
     },
   },
   servers: [
