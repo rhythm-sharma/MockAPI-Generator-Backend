@@ -18,6 +18,16 @@ components:
         email: fake@example.com
         name: fake name
         role: user
+    Project:
+      type: object
+      properties:
+        name: 
+          type: string
+        prefix: 
+          type: string
+      example:
+        name: fake name
+        prefix: fake prefix
 
     Token:
       type: object
@@ -57,6 +67,15 @@ components:
           example:
             code: 400
             message: Email already taken
+    DuplicateProjectName:
+      description: Project name already taken
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: 400
+            message: Project name already taken
     Unauthorized:
       description: Unauthorized
       content:

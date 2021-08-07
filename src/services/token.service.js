@@ -113,6 +113,17 @@ const generateVerifyEmailToken = async (user) => {
   return verifyEmailToken;
 };
 
+/**
+ * Get UserId By Token
+ * @param {Object} req - request object
+ * @returns {Promise<Project>}
+ */
+const getUserIdByToken = async (req) => {
+  const token = req.headers.authorization.split(' ')[1];
+  const decodedToken = jwt.verify(token, config.jwt.secret);
+  return decodedToken.sub;
+};
+
 module.exports = {
   generateToken,
   saveToken,
@@ -120,4 +131,5 @@ module.exports = {
   generateAuthTokens,
   generateResetPasswordToken,
   generateVerifyEmailToken,
+  getUserIdByToken,
 };
