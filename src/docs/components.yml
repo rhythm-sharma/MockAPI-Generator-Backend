@@ -18,6 +18,7 @@ components:
         email: fake@example.com
         name: fake name
         role: user
+
     Project:
       type: object
       properties:
@@ -28,6 +29,33 @@ components:
       example:
         name: fake name
         prefix: fake prefix
+    
+    Resources:
+      type: object
+      properties:
+        name:
+          type: string
+          example: fake name
+        prefix:
+          type: string
+          example: fake prefix
+        endpoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/Endpoints'
+
+    Endpoints:
+      type: object
+      properties:
+          method:
+            type: string
+            example: GET
+          url:
+            type: string
+            example: api/v1
+          enabled:
+            type: boolean
+            example: true
 
     Token:
       type: object
@@ -76,6 +104,15 @@ components:
           example:
             code: 400
             message: Project name already taken
+    DuplicateResourceName:
+      description: Resource name already taken
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: 400
+            message: Resource name already taken
     Unauthorized:
       description: Unauthorized
       content:
