@@ -2,14 +2,38 @@ const httpStatus = require('http-status');
 const pick = require('../utils/pick');
 // const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
-const { resourceService } = require('../services');
+const { resourceService, mockService } = require('../services');
 
 const createResource = catchAsync(async (req, res) => {
   const resourceObj = JSON.parse(JSON.stringify(req.body));
   const params = pick(req.params, ['projectId']);
   resourceObj.projectId = params.projectId;
-  const resource = await resourceService.createResource(resourceObj);
-  res.status(httpStatus.CREATED).send(resource);
+
+  const { responseSchema, response } = resourceObj;
+
+  delete resourceObj.responseSchema;
+  delete resourceObj.response;
+
+  let resource = await resourceService.createResource(resourceObj);
+
+  const mockObj = {
+    responseSchema,
+    response,
+    resourceId: resource._id,
+  };
+
+  const mock = await mockService.createMockData(mockObj);
+  resourceObj.mockId = mock._id;
+
+  Object.assign(params, { resourceId: resource._id });
+
+  resource = await resourceService.updateResourceById(params, resourceObj);
+
+  const newResource = JSON.parse(JSON.stringify(resource));
+  newResource.responseSchema = responseSchema;
+  newResource.response = response;
+
+  res.status(httpStatus.CREATED).send(newResource);
 });
 
 const getResources = catchAsync(async (req, res) => {
