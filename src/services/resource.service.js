@@ -1,6 +1,7 @@
 const httpStatus = require('http-status');
 const { Resource } = require('../models');
-const { projectService } = require('./index');
+const mockService = require('./mock.service');
+const projectService = require('./project.service');
 const ApiError = require('../utils/ApiError');
 
 /**
@@ -20,9 +21,7 @@ const createResource = async (resourceBody) => {
  * @param {ObjectId} id
  * @returns {Promise<User>}
  */
-const getResourceById = async (id) => {
-  return Resource.findById(id);
-};
+const getResourceById = async (id) => Resource.findById(id);
 
 /**
  * Query for Resources
@@ -78,6 +77,7 @@ const deleteResourceById = async (params) => {
   if (!resource) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Resource not found');
   }
+  await mockService.deleteMockDataByResourceId(resourceId);
   await resource.remove();
   return resource;
 };
