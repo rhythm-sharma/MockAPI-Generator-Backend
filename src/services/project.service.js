@@ -33,9 +33,7 @@ const queryProjects = async (id, options) => {
  * @param {ObjectId} id
  * @returns {Promise<User>}
  */
-const getProjectById = async (id) => {
-  return Project.findById(id);
-};
+const getProjectById = async (id) => Project.findById(id);
 
 /**
  * Delete project by id
