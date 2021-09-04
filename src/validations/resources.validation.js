@@ -6,7 +6,8 @@ const createResource = {
     name: Joi.string().required(),
     prefix: Joi.string().required(),
     count: Joi.number().required(),
-    response: Joi.string().required(),
+    response: Joi.array().required(),
+    responseSchema: Joi.array().required(),
     endpoints: Joi.array().items({
       method: Joi.string().required(),
       url: Joi.string().required(),
@@ -31,7 +32,8 @@ const updateResource = {
     name: Joi.string().required(),
     prefix: Joi.string().required(),
     count: Joi.number().required(),
-    response: Joi.string().required(),
+    response: Joi.array().required(),
+    responseSchema: Joi.array().required(),
     endpoints: Joi.array().items({
       method: Joi.string().required(),
       url: Joi.string().required(),
