@@ -35,11 +35,9 @@ const resourceSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
-    response: {
-      type: String,
-      required: true,
+    mockId: {
+      type: mongoose.SchemaTypes.ObjectId,
     },
-    responseSchema: [],
     endpoints: [endpointSchema],
   },
   {
