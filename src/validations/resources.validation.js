@@ -4,9 +4,12 @@ const { objectId } = require('./custom.validation');
 const createResource = {
   body: Joi.object().keys({
     name: Joi.string().required(),
-    prefix: Joi.string().required(),
     count: Joi.number().required(),
-    responseSchema: Joi.array().required(),
+    responseSchema: Joi.array().items({
+      type: Joi.string().required(),
+      name: Joi.string().required(),
+      fakerMethod: Joi.string(),
+    }),
     endpoints: Joi.array().items({
       method: Joi.string().required(),
       url: Joi.string().required(),
@@ -29,9 +32,12 @@ const getResources = {
 const updateResource = {
   body: Joi.object().keys({
     name: Joi.string().required(),
-    prefix: Joi.string().required(),
     count: Joi.number().required(),
-    responseSchema: Joi.array().required(),
+    responseSchema: Joi.array().items({
+      type: Joi.string().required(),
+      name: Joi.string().required(),
+      fakerMethod: Joi.string(),
+    }),
     endpoints: Joi.array().items({
       method: Joi.string().required(),
       url: Joi.string().required(),
