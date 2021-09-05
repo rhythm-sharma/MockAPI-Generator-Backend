@@ -4,11 +4,13 @@ const faker = require('faker');
  * Generate List of Fake Data by defined Scema and Return it
  * @param {number} count
  * @param {Object} schema
+ * @param {number} continueId
  */
-const generateFakeDataListByCount = (count, schema) => {
+const generateFakeDataListByCount = (count, schema, continueId = 0) => {
   const fakedata = [];
+  let id = continueId;
   for (let i = 0; i < count; i += 1) {
-    const dataObj = { id: `${i + 1}` };
+    const dataObj = { id: `${id + 1}` };
     schema.forEach((item) => {
       switch (item.type) {
         case 'Faker.js':
@@ -37,6 +39,7 @@ const generateFakeDataListByCount = (count, schema) => {
       }
     });
     fakedata.push(dataObj);
+    id += 1;
   }
   return fakedata;
 };
