@@ -32,6 +32,10 @@ router
   .patch(auth(), validate(resourcesValidation.updateResource), resourcesController.updateResource)
   .delete(auth(), validate(resourcesValidation.deleteResource), resourcesController.deleteResource);
 
+router
+  .route('/:projectId/resources/:resourceId/generate')
+  .post(auth(), validate(resourcesValidation.generateMockResponseData), resourcesController.generateMockResponseData);
+
 module.exports = router;
 
 /**

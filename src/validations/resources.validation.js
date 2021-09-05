@@ -6,7 +6,6 @@ const createResource = {
     name: Joi.string().required(),
     prefix: Joi.string().required(),
     count: Joi.number().required(),
-    response: Joi.array().required(),
     responseSchema: Joi.array().required(),
     endpoints: Joi.array().items({
       method: Joi.string().required(),
@@ -32,7 +31,6 @@ const updateResource = {
     name: Joi.string().required(),
     prefix: Joi.string().required(),
     count: Joi.number().required(),
-    response: Joi.array().required(),
     responseSchema: Joi.array().required(),
     endpoints: Joi.array().items({
       method: Joi.string().required(),
@@ -53,9 +51,16 @@ const deleteResource = {
   }),
 };
 
+const generateMockResponseData = {
+  body: Joi.object().keys({
+    count: Joi.number().required(),
+  }),
+};
+
 module.exports = {
   createResource,
   getResources,
   updateResource,
   deleteResource,
+  generateMockResponseData,
 };
