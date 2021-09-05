@@ -14,7 +14,7 @@ const createMockData = async (mockBody) => Mock.create(mockBody);
  * @param {ObjectId} id
  * @returns {Promise<User>}
  */
-const getMockDataResourceById = async (id) => Mock.findOne({ resourceId: id });
+const getMockDataByResourceId = async (id) => Mock.findOne({ resourceId: id });
 
 /**
  * Get Mock Data by id
@@ -55,7 +55,7 @@ const queryMockData = async (params) => {
  * @returns {Promise<User>}
  */
 const updateMockDataResponseById = async (id, updateBody) => {
-  const mock = await getMockDataResourceById(id);
+  const mock = await getMockDataByResourceId(id);
   if (!mock) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Mock Data not found');
   }
@@ -66,7 +66,7 @@ const updateMockDataResponseById = async (id, updateBody) => {
 
 module.exports = {
   createMockData,
-  getMockDataResourceById,
+  getMockDataByResourceId,
   deleteMockDataByResourceId,
   queryMockData,
   getMockDataById,

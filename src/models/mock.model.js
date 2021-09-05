@@ -3,10 +3,6 @@ const { toJSON } = require('./plugins');
 
 const mockSchema = mongoose.Schema(
   {
-    responseSchema: {
-      type: Array,
-      required: true,
-    },
     response: {
       type: Array,
       required: true,
