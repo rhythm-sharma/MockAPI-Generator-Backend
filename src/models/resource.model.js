@@ -1,21 +1,42 @@
 const mongoose = require('mongoose');
 const { toJSON, paginate } = require('./plugins');
 
-const endpointSchema = mongoose.Schema({
-  method: {
-    type: String,
-    required: true,
+const endpointSchema = mongoose.Schema(
+  {
+    method: {
+      type: String,
+      required: true,
+    },
+    url: {
+      type: String,
+      required: true,
+    },
+    enabled: {
+      type: Boolean,
+      required: true,
+      default: true,
+    },
   },
-  url: {
-    type: String,
-    required: true,
+  { _id: false }
+);
+
+const responseSchemaWrapper = mongoose.Schema(
+  {
+    type: {
+      type: String,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    fakerMethod: {
+      type: String,
+      required: false,
+    },
   },
-  enabled: {
-    type: Boolean,
-    required: true,
-    default: true,
-  },
-});
+  { _id: false }
+);
 
 const resourceSchema = mongoose.Schema(
   {
@@ -27,10 +48,6 @@ const resourceSchema = mongoose.Schema(
       type: mongoose.SchemaTypes.ObjectId,
       required: true,
     },
-    prefix: {
-      type: String,
-      required: true,
-    },
     count: {
       type: Number,
       required: true,
@@ -39,6 +56,7 @@ const resourceSchema = mongoose.Schema(
       type: mongoose.SchemaTypes.ObjectId,
     },
     endpoints: [endpointSchema],
+    responseSchema: [responseSchemaWrapper],
   },
   {
     timestamps: true,
