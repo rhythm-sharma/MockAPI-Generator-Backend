@@ -46,11 +46,11 @@ const generateFakeDataListByCount = (count, schema, continueId = 0) => {
 
 /**
  * Generate Single object of Fake Data by defined Scema and Return it
- * @param {number} currentSize
+ * @param {number} continueId
  * @param {Object} schema
  */
-const generateFakeDataObject = (currentSize, schema) => {
-  const dataObj = { id: `${currentSize + 1}` };
+const generateFakeDataObject = (continueId, schema) => {
+  const dataObj = { id: `${continueId + 1}` };
   schema.forEach((item) => {
     switch (item.type) {
       case 'Faker.js':
